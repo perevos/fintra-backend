@@ -13,17 +13,17 @@ public class PortfolioMapperTest {
 
     @Test
     void toDto_shouldMapToDtoCorrectly() {
-        // given
+        // arrange
         Portfolio portfolio = Portfolio.builder()
                 .id(1L)
                 .name("Test Portfolio")
                 .description("Sample description")
                 .build();
 
-        // when
+        // act
         PortfolioResponseDto dto = portfolioMapper.toDto(portfolio);
 
-        // then
+        // assert
         assertNotNull(dto);
         assertEquals(1L, dto.getId());
         assertEquals("Test Portfolio", dto.getName());
