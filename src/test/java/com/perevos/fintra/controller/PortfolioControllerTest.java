@@ -1,5 +1,7 @@
 package com.perevos.fintra.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.perevos.fintra.dto.CreatePortfolioRequest;
 import com.perevos.fintra.dto.PortfolioAssetDto;
 import com.perevos.fintra.dto.PortfolioDetailsDto;
 import com.perevos.fintra.dto.PortfolioOverviewDto;
@@ -9,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -16,6 +19,7 @@ import java.util.List;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -44,6 +48,9 @@ public class PortfolioControllerTest {
 
     @MockitoBean
     private PortfolioService portfolioService;
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @Test
     void getAllPortfolios_shouldReturnJsonList() throws Exception {
@@ -109,13 +116,27 @@ public class PortfolioControllerTest {
     }
 
     @Test
-    void getPortfolioDetails_returnsNotFoundForInvalidId() throws Exception {
+    void getPortfolioDetails_shouldReturnNotFoundForInvalidId() throws Exception {
         // arrange
         when(portfolioService.getPortfolioDetails(INVALID_PORTFOLIO_ID))
                 .thenThrow(new ResourceNotFoundException("Portfolio not found"));
 
-        // act && assets
+        // act && assert
         mockMvc.perform(get("/api/portfolio/" + INVALID_PORTFOLIO_ID))
                 .andExpect(status().isNotFound());
     }
+
+    @Test
+    void createPortfolio_shouldReturnCreated() throws Exception {
+        // arrange
+        CreatePortfolioRequest request = CreatePortfolioRequest.builder().build();
+
+        // act && assert
+        mockMvc.perform(post("/api/portfolio")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(String.valueOf(objectMapper.writeValueAsString(request)))
+                )
+                .andExpect(status().isCreated());
+    }
+
 }
