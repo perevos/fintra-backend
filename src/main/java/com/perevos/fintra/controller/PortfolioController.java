@@ -1,6 +1,6 @@
 package com.perevos.fintra.controller;
 
-import com.perevos.fintra.dto.PortfolioResponseDto;
+import com.perevos.fintra.dto.PortfolioOverviewDto;
 import com.perevos.fintra.service.PortfolioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +17,7 @@ public class PortfolioController {
     private final PortfolioService portfolioService;
 
     @GetMapping
-    public List<PortfolioResponseDto> getAllPortfolios() {
+    public List<PortfolioOverviewDto> getAllPortfolios() {
         return portfolioService.getAllPortfolios();
     }
 

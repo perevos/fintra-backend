@@ -1,6 +1,6 @@
 package com.perevos.fintra.service;
 
-import com.perevos.fintra.dto.PortfolioResponseDto;
+import com.perevos.fintra.dto.PortfolioOverviewDto;
 import com.perevos.fintra.mapper.PortfolioMapper;
 import com.perevos.fintra.repository.PortfolioRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ public class PortfolioService {
     private final PortfolioRepository portfolioRepository;
     private final PortfolioMapper portfolioMapper;
 
-    public List<PortfolioResponseDto> getAllPortfolios() {
+    public List<PortfolioOverviewDto> getAllPortfolios() {
         return portfolioRepository.findAll()
                 .stream()
                 .map(portfolioMapper::toDto)

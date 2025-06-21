@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class PortfolioResponseDto {
+public class PortfolioOverviewDto {
     private Long id;
     private String name;
     private String description;

@@ -1,6 +1,6 @@
 package com.perevos.fintra.mapper;
 
-import com.perevos.fintra.dto.PortfolioResponseDto;
+import com.perevos.fintra.dto.PortfolioOverviewDto;
 import com.perevos.fintra.entity.Portfolio;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +21,7 @@ public class PortfolioMapperTest {
                 .build();
 
         // act
-        PortfolioResponseDto dto = portfolioMapper.toDto(portfolio);
+        PortfolioOverviewDto dto = portfolioMapper.toDto(portfolio);
 
         // assert
         assertNotNull(dto);

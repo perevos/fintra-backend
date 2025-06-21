@@ -1,6 +1,6 @@
 package com.perevos.fintra.controller;
 
-import com.perevos.fintra.dto.PortfolioResponseDto;
+import com.perevos.fintra.dto.PortfolioOverviewDto;
 import com.perevos.fintra.service.PortfolioService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,13 +29,13 @@ public class PortfolioControllerTest {
     @Test
     void getAllPortfolios_shouldReturnJsonList() throws Exception {
         // arrange
-        List<PortfolioResponseDto> mockResponse = List.of(
-                PortfolioResponseDto.builder()
+        List<PortfolioOverviewDto> mockResponse = List.of(
+                PortfolioOverviewDto.builder()
                         .id(1L)
                         .name("Growth")
                         .description("Growth portfolio")
                         .build(),
-                PortfolioResponseDto.builder()
+                PortfolioOverviewDto.builder()
                         .id(2L)
                         .name("Income")
                         .description("Income portfolio")

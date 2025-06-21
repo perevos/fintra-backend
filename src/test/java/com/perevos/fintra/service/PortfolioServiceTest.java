@@ -1,6 +1,6 @@
 package com.perevos.fintra.service;
 
-import com.perevos.fintra.dto.PortfolioResponseDto;
+import com.perevos.fintra.dto.PortfolioOverviewDto;
 import com.perevos.fintra.entity.Portfolio;
 import com.perevos.fintra.mapper.PortfolioMapper;
 import com.perevos.fintra.repository.PortfolioRepository;
@@ -41,7 +41,7 @@ public class PortfolioServiceTest {
         when(portfolioRepository.findAll()).thenReturn(List.of());
 
         // act
-        List<PortfolioResponseDto> result = portfolioService.getAllPortfolios();
+        List<PortfolioOverviewDto> result = portfolioService.getAllPortfolios();
 
         // assert
         assertNotNull(result);
@@ -60,7 +60,7 @@ public class PortfolioServiceTest {
         when(portfolioRepository.findAll()).thenReturn(List.of(portfolio1, portfolio2));
 
         // act
-        List<PortfolioResponseDto> result = portfolioService.getAllPortfolios();
+        List<PortfolioOverviewDto> result = portfolioService.getAllPortfolios();
 
         // assets
         assertNotNull(result);
