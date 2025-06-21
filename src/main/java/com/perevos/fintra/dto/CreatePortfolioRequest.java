@@ -1,17 +1,16 @@
 package com.perevos.fintra.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Builder
 public class CreatePortfolioRequest {
+    @EqualsAndHashCode.Include
     private String name;
+
+    @EqualsAndHashCode.Include
     private String description;
 }

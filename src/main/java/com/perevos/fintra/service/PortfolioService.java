@@ -1,5 +1,6 @@
 package com.perevos.fintra.service;
 
+import com.perevos.fintra.dto.CreatePortfolioRequest;
 import com.perevos.fintra.dto.PortfolioDetailsDto;
 import com.perevos.fintra.dto.PortfolioOverviewDto;
 import com.perevos.fintra.entity.Portfolio;
@@ -29,5 +30,11 @@ public class PortfolioService {
         Portfolio portfolioEntity = portfolioRepository.findById(portfolioId)
                 .orElseThrow(() -> new ResourceNotFoundException("Portfolio not found with id: " + portfolioId));
         return portfolioMapper.toPortfolioDetailsDto(portfolioEntity);
+    }
+
+    public Long createPortfolio(CreatePortfolioRequest request) {
+        Portfolio portfolioEntity = portfolioMapper.toPortfolioEntity(request);
+        Portfolio saved = portfolioRepository.save(portfolioEntity);
+        return saved.getId();
     }
 }

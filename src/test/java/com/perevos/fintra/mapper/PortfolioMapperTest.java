@@ -1,5 +1,6 @@
 package com.perevos.fintra.mapper;
 
+import com.perevos.fintra.dto.CreatePortfolioRequest;
 import com.perevos.fintra.dto.PortfolioDetailsDto;
 import com.perevos.fintra.dto.PortfolioOverviewDto;
 import com.perevos.fintra.entity.Portfolio;
@@ -78,6 +79,22 @@ public class PortfolioMapperTest {
 
         verify(assetMapper, times(1)).toPortfolioAssetDto(asset1);
         verify(assetMapper, times(1)).toPortfolioAssetDto(asset2);
+    }
+
+    @Test
+    void toPortfolioEntity_shouldMapCreatePortfolioRequestCorrectly() {
+        // arrange
+        CreatePortfolioRequest request = CreatePortfolioRequest.builder()
+                .name(PORTFOLIO_NAME)
+                .description(PORTFOLIO_DESCRIPTION)
+                .build();
+
+        // act
+        Portfolio entity = portfolioMapper.toPortfolioEntity(request);
+
+        // assert
+        assertEquals(PORTFOLIO_NAME, entity.getName());
+        assertEquals(PORTFOLIO_DESCRIPTION, entity.getDescription());
     }
 
 }

@@ -1,5 +1,6 @@
 package com.perevos.fintra.service;
 
+import com.perevos.fintra.dto.CreatePortfolioRequest;
 import com.perevos.fintra.dto.PortfolioOverviewDto;
 import com.perevos.fintra.entity.Portfolio;
 import com.perevos.fintra.exception.ResourceNotFoundException;
@@ -100,5 +101,19 @@ public class PortfolioServiceTest {
         assertEquals("Portfolio not found with id: " + INVALID_PORTFOLIO_ID, ex.getMessage());
         verify(portfolioRepository).findById(INVALID_PORTFOLIO_ID);
         verifyNoInteractions(portfolioMapper);
+    }
+
+    @Test
+    void createPortfolio_shouldReturnGeneratedId() {
+        // arrange
+        CreatePortfolioRequest request = CreatePortfolioRequest.builder().build();
+        Portfolio portfolioEntity = Portfolio.builder().build();
+        when(portfolioMapper.toPortfolioEntity(request)).thenReturn(portfolioEntity);
+
+        Portfolio savedPortfolio = Portfolio.builder().id(PORTFOLIO_1_ID).build();
+        when(portfolioRepository.save(portfolioEntity)).thenReturn(savedPortfolio);
+
+        // act && assert
+        assertEquals(PORTFOLIO_1_ID, portfolioService.createPortfolio(request));
     }
 }

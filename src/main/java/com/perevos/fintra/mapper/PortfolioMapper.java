@@ -1,5 +1,6 @@
 package com.perevos.fintra.mapper;
 
+import com.perevos.fintra.dto.CreatePortfolioRequest;
 import com.perevos.fintra.dto.PortfolioDetailsDto;
 import com.perevos.fintra.dto.PortfolioOverviewDto;
 import com.perevos.fintra.entity.Portfolio;
@@ -29,6 +30,13 @@ public class PortfolioMapper {
                         .stream()
                         .map(assetMapper::toPortfolioAssetDto)
                         .toList())
+                .build();
+    }
+
+    public Portfolio toPortfolioEntity(CreatePortfolioRequest request) {
+        return Portfolio.builder()
+                .name(request.getName())
+                .description(request.getDescription())
                 .build();
     }
 

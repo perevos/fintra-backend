@@ -20,6 +20,7 @@ import java.util.List;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -127,16 +128,18 @@ public class PortfolioControllerTest {
     }
 
     @Test
-    void createPortfolio_shouldReturnCreated() throws Exception {
+    void createPortfolio_shouldReturnCreatedAndLocationHeader() throws Exception {
         // arrange
         CreatePortfolioRequest request = CreatePortfolioRequest.builder().build();
+        when(portfolioService.createPortfolio(request)).thenReturn(GROWTH_PORTFOLIO_ID);
 
         // act && assert
         mockMvc.perform(post("/api/portfolio")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(String.valueOf(objectMapper.writeValueAsString(request)))
                 )
-                .andExpect(status().isCreated());
+                .andExpect(status().isCreated())
+                .andExpect(header().string("Location", "/api/portfolio/" + GROWTH_PORTFOLIO_ID));
     }
 
 }
