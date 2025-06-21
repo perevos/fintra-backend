@@ -12,7 +12,7 @@ public class PortfolioMapperTest {
     private final PortfolioMapper portfolioMapper = new PortfolioMapper();
 
     @Test
-    void toDto_shouldMapToDtoCorrectly() {
+    void toPortfolioOverviewDto_shouldMapToDtoCorrectly() {
         // arrange
         Portfolio portfolio = Portfolio.builder()
                 .id(1L)
@@ -21,7 +21,7 @@ public class PortfolioMapperTest {
                 .build();
 
         // act
-        PortfolioOverviewDto dto = portfolioMapper.toDto(portfolio);
+        PortfolioOverviewDto dto = portfolioMapper.toPortfolioOverviewDto(portfolio);
 
         // assert
         assertNotNull(dto);

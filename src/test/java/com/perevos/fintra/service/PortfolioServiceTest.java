@@ -67,7 +67,7 @@ public class PortfolioServiceTest {
         assertEquals(2, result.size());
 
         verify(portfolioRepository, times(1)).findAll();
-        verify(portfolioMapper, times(1)).toDto(portfolio1);
-        verify(portfolioMapper, times(1)).toDto(portfolio2);
+        verify(portfolioMapper, times(1)).toPortfolioOverviewDto(portfolio1);
+        verify(portfolioMapper, times(1)).toPortfolioOverviewDto(portfolio2);
     }
 }
